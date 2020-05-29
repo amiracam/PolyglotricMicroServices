@@ -12,6 +12,11 @@ Configurable >> configuration [
 ]
 
 { #category : #running }
+Configurable >> defaultConfigurationPath [
+	^ '../../config/' , self class name , '.json'.
+]
+
+{ #category : #running }
 Configurable >> enforceUnixPath: aPathString [
 
 	^ aPathString copyWithRegex: '\\' matchesReplacedWith: '/'
