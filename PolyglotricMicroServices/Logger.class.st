@@ -39,7 +39,8 @@ Logger >> homeDir: anObject [
 
 { #category : #writing }
 Logger >> info: anObject [
-	self
+
+	^self
 		write:
 			(String new writeStream
 				nextPutAll: '[INFO]';
@@ -81,8 +82,9 @@ Logger >> logFile [
 
 { #category : #writing }
 Logger >> write: aString [
-	| reference |
+	| reference now |
 	
+	now := Time now.
 	reference := self logFile asFileReference.
 	
 	reference
@@ -91,10 +93,12 @@ Logger >> write: aString [
 			s setToEnd.
 			
 			s
-				nextPutAll: Time now asString;
+				nextPutAll: now asString;
 				tab;
 				nextPutAll: aString;
 				cr;
 				flush
 			].
+		
+	^ now
 ]

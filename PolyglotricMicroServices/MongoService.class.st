@@ -28,8 +28,9 @@ MongoService >> initialize [
 { #category : #'start-stop' }
 MongoService >> log: aMessage [
 
-	self logInfo: 'Mongo Service started successfully'.
-	logs add: { #msg -> aMessage  } asDictionary 
+	| now |
+	now := self logInfo: aMessage.
+	logs add: { #msg -> aMessage. #ts -> now printString} asDictionary 
 ]
 
 { #category : #'start-stop' }
@@ -43,6 +44,8 @@ MongoService >> startClient [
 { #category : #'start-stop' }
 MongoService >> stop [ 
 
+	self log: 'Stopping Mongo Service'.
 	client closeIfOpen.
-	self logInfo: 'Mongo Service stopped'
+	self logInfo: 'Stopped Mongo Service'
+	
 ]

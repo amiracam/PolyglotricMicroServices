@@ -28,5 +28,5 @@ Loggable >> logFolder [
 
 { #category : #logging }
 Loggable >> logInfo: anObject [
-	logger ifNotNil: [ :l | l info: anObject  ].
+	^ logger ifNotNil: [ :l | l info: anObject  ].
 ]
