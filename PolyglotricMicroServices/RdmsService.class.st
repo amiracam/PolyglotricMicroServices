@@ -3,7 +3,8 @@ Class {
 	#superclass : #ExtendedService,
 	#instVars : [
 		'client',
-		'rdmsConnectionPool'
+		'rdmsConnectionPool',
+		'queryRegistry'
 	],
 	#classVars : [
 		'ExceptionAnnouncer'
@@ -26,6 +27,7 @@ RdmsService >> checkConnectionStatus [
 		withConnection: [ :conn | conn isWorking ] ]
 		on: Exception
 		do: [ :ex | 
+			self halt. 
 			self logInfo: ex messageText.
 			ex return: false
 			].
@@ -53,33 +55,14 @@ RdmsService >> connectionPoolSize [
 	^ (configuration at: 'connectionPoolSize')
 ]
 
-{ #category : #'name resolutions' }
-RdmsService >> connectionUrlFor: user and: password [
-	"Return String"
+{ #category : #'as yet unclassified' }
+RdmsService >> executeNamedQuery: queryName withArguments: queryArgs [
 
-	| dbType |
+	| sql |
 	
-	dbType := self resolveDbTypeFor: self currentDatabaseType.
-
-	^ self
-		perform: (dbType, 'ConnectionStringFor:and:') asSymbol
-		withArguments: {user. password }.
-]
-
-{ #category : #'name resolutions' }
-RdmsService >> dbTypes [
-	^ DbTypes.
-]
-
-{ #category : #testing }
-RdmsService >> generateBootstrapDBURL [
-
-	| bootstrapUser bootstrapPass  |
-	bootstrapUser := configuration at: #bootstrap_user.
-	bootstrapPass := configuration at: #bootstrap_pass.
+	sql := (configuration at: 'queryRegistry') at: queryName .
 	
-	^self connectionUrlFor: bootstrapUser and: bootstrapPass.
-	
+
 	
 ]
 
@@ -102,18 +85,6 @@ RdmsService >> initializeDatabaseConnection [
 ]
 
 { #category : #initialization }
-RdmsService >> initializeLogger [
-	"grab url from config file later"
-	
-	super initializeLogger.
-	self class exceptionAnnouncer
-		when: RdmsAnnouncement
-		do: [ :event | 
-			self logInfo: event message 
-			].
-]
-
-{ #category : #initialization }
 RdmsService >> loadDatabaseConnectionPoolFactory [
 	
 	| poolID |
@@ -121,16 +92,9 @@ RdmsService >> loadDatabaseConnectionPoolFactory [
 		ifNotNil: [Smalltalk at: poolID asSymbol ].
 ]
 
-{ #category : #'name resolutions' }
-RdmsService >> resolveDbTypeFor: dbMoniker [
-
-	^ self dbTypes at: dbMoniker asLowercase asSymbol ifAbsent: [  ].
-]
-
 { #category : #acccessing }
 RdmsService >> serverUrl [
-	^self generateBootstrapDBURL ifNil:[(configuration at: 'url') trim.]
-	
+	^(configuration at: 'url') trim.
 ]
 
 { #category : #running }
@@ -142,16 +106,4 @@ RdmsService >> stop [
 	client := nil.
 	logger := nil.
 	
-]
-
-{ #category : #testing }
-RdmsService >> testDatabaseAvailability [
-
-	| bootstrapUser bootstrapPass url |
-	bootstrapUser := configuration at: #bootstrap_user.
-	bootstrapPass := configuration at: #bootstrap_pass.
-	
-	url := self connectionUrlFor: bootstrapUser and: bootstrapPass.
-	
-	^ self testConnection: url.  
 ]
