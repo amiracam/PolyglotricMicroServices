@@ -1,17 +1,10 @@
 Class {
-	#name : #Dummy2,
+	#name : #Dummy3,
 	#superclass : #Object,
 	#traits : 'DataObject',
 	#classTraits : 'DataObject classTrait',
 	#instVars : [
-		'instVar3',
-		'instVar4'
+		'instVar5'
 	],
 	#category : #'PolyglotricMicroServices-Tests'
 }
-
-{ #category : #'as yet unclassified' }
-Dummy2 >> replicationSpec [
-
-	^{#instVar4 -> [:v | Dummy3 newFromData: v]} 
-]
