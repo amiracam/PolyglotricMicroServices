@@ -1,30 +1,60 @@
 Trait {
 	#name : #DataObject,
 	#instVars : [
-		'data'
+		'_data'
 	],
-	#category : #PolyglotricMicroServices
+	#category : #'PolyglotricMicroServices-traits'
 }
 
 { #category : #'instance creation' }
 DataObject classSide >> newFromData: aDictionary [
-
+	"set data dictionary on new instance , attribute access relies on said dictionary"
 	| inst |
 	inst := self new.
-	inst instVarAt: (self instVarNames indexOf: #data) put: aDictionary.
+	inst instVarAt: (self allInstVarNames indexOf: #_data) put: aDictionary.
 	^inst 
+]
+
+{ #category : #'as yet unclassified' }
+DataObject >> asDictionary [
+	^ _data ifNil: [ _data := Dictionary new ]
+]
+
+{ #category : #'as yet unclassified' }
+DataObject >> attributes [ 
+	^#()
 ]
 
 { #category : #'reflective operations' }
 DataObject >> doesNotUnderstand: aMessage [
+	| selector |
+	^ (self attributes includes:
+		   ((selector := aMessage selector) copyWithout: $:))
+		  ifTrue: [ 
+			  selector isUnary
+				  ifTrue: [ 
+					  | specs data |
+					  specs := self replicationSpec asDictionary.
+					  data := _data at: selector.
+					  (data isKindOf: Dictionary)
+						  ifTrue: [ "reify via spec translation block"
+							  _data
+								  at: selector
+								  put: ((specs at: selector ifAbsent: [ [:v | v ] ]) value: data).
+							  _data at: selector ]
+						  ifFalse: [ data ] ]
+				  ifFalse: [ 
+					  _data ifNil: [ _data := Dictionary new ].
+					  _data
+						  at: (selector copyWithout: $:)
+						  put: aMessage arguments first ] ]
+		  ifFalse: [ super doesNotUnderstand: aMessage ]
+]
 
-	| specs selector |
+{ #category : #'as yet unclassified' }
+DataObject >> persistOn: dict useName: instVarName [ 
 	
-	^((selector := aMessage selector) isUnary and: [ self class instVarNames includes: selector ])
-		ifTrue: [ specs := self replicationSpec asDictionary.
-					(specs at: selector ifAbsent: [[:v | v] ]) value: (data at: selector)	
-				 ]
-		ifFalse: [super doesNotUnderstand: aMessage]
+	dict at: instVarName put: self asDictionary 
 ]
 
 { #category : #'as yet unclassified' }

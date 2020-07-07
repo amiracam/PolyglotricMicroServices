@@ -1,7 +1,7 @@
 Class {
 	#name : #RdmsFunctionDispatcher,
 	#superclass : #RdmsService,
-	#category : #PolyglotricMicroServices
+	#category : #'PolyglotricMicroServices-service'
 }
 
 { #category : #services }

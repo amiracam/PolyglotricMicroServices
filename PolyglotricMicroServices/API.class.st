@@ -11,7 +11,7 @@ Class {
 	#classVars : [
 		'Source'
 	],
-	#category : #PolyglotricMicroServices
+	#category : #'PolyglotricMicroServices-service'
 }
 
 { #category : #'reflective operations' }

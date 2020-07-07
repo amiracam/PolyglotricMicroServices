@@ -8,7 +8,7 @@ Class {
 	#classVars : [
 		'singleton'
 	],
-	#category : #PolyglotricMicroServices
+	#category : #'PolyglotricMicroServices-service'
 }
 
 { #category : #'instance creation' }

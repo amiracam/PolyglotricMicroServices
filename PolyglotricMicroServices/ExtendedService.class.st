@@ -11,7 +11,7 @@ Class {
 		'id',
 		'logger'
 	],
-	#category : #PolyglotricMicroServices
+	#category : #'PolyglotricMicroServices-service'
 }
 
 { #category : #initialization }

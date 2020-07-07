@@ -13,7 +13,7 @@ Class {
 	#classInstVars : [
 		'singleton'
 	],
-	#category : #PolyglotricMicroServices
+	#category : #'PolyglotricMicroServices-service'
 }
 
 { #category : #routes }

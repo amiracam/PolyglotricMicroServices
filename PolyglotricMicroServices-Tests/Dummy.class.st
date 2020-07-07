@@ -3,12 +3,13 @@ Class {
 	#superclass : #Object,
 	#traits : 'DataObject',
 	#classTraits : 'DataObject classTrait',
-	#instVars : [
-		'instVar1',
-		'instVar2'
-	],
 	#category : #'PolyglotricMicroServices-Tests'
 }
+
+{ #category : #'as yet unclassified' }
+Dummy >> attributes [ 
+	^#(instVar1 instVar2 instVar3)
+]
 
 { #category : #'as yet unclassified' }
 Dummy >> replicationSpec [

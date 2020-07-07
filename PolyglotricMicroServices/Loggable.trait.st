@@ -3,7 +3,7 @@ Trait {
 	#instVars : [
 		'logger'
 	],
-	#category : #PolyglotricMicroServices
+	#category : #'PolyglotricMicroServices-traits'
 }
 
 { #category : #initialization }

@@ -9,7 +9,7 @@ Class {
 	#classVars : [
 		'ExceptionAnnouncer'
 	],
-	#category : #PolyglotricMicroServices
+	#category : #'PolyglotricMicroServices-service'
 }
 
 { #category : #announcements }

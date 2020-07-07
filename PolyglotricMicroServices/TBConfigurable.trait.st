@@ -8,7 +8,7 @@ Trait {
 	#instVars : [
 		'appConfiguration'
 	],
-	#category : #PolyglotricMicroServices
+	#category : #'PolyglotricMicroServices-traits'
 }
 
 { #category : #initialization }

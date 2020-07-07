@@ -5,7 +5,7 @@ Class {
 		'client',
 		'logs'
 	],
-	#category : #PolyglotricMicroServices
+	#category : #'PolyglotricMicroServices-service'
 }
 
 { #category : #initialization }

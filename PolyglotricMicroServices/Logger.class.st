@@ -8,7 +8,7 @@ Class {
 		'todaysFolder',
 		'logFile'
 	],
-	#category : #PolyglotricMicroServices
+	#category : #'PolyglotricMicroServices-utilities'
 }
 
 { #category : #'instance creation' }

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'data'
 	],
-	#category : #PolyglotricMicroServices
+	#category : #'PolyglotricMicroServices-utilities'
 }
 
 { #category : #'instance creation' }

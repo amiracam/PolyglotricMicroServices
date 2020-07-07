@@ -3,8 +3,10 @@ Class {
 	#superclass : #Object,
 	#traits : 'DataObject',
 	#classTraits : 'DataObject classTrait',
-	#instVars : [
-		'instVar5'
-	],
 	#category : #'PolyglotricMicroServices-Tests'
 }
+
+{ #category : #'as yet unclassified' }
+Dummy3 >> attributes [ 
+	^#(instVar5)
+]

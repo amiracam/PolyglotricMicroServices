@@ -9,7 +9,7 @@ Class {
 	#classVars : [
 		'DbTypes'
 	],
-	#category : #PolyglotricMicroServices
+	#category : #'PolyglotricMicroServices-service'
 }
 
 { #category : #initialization }

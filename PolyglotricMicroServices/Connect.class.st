@@ -7,7 +7,7 @@ Class {
 		'pass',
 		'ip'
 	],
-	#category : #PolyglotricMicroServices
+	#category : #'PolyglotricMicroServices-service'
 }
 
 { #category : #'instance creation' }

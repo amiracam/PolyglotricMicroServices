@@ -3,7 +3,7 @@ Trait {
 	#instVars : [
 		'configuration'
 	],
-	#category : #PolyglotricMicroServices
+	#category : #'PolyglotricMicroServices-traits'
 }
 
 { #category : #accessing }
