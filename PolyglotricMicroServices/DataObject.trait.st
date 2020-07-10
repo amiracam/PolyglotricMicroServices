@@ -58,6 +58,30 @@ DataObject >> persistOn: dict useName: instVarName [
 ]
 
 { #category : #'as yet unclassified' }
+DataObject >> printString [
+	 
+	^String 
+		streamContents: [ :s | 
+			| dict sortedKeys| 
+			
+			s nextPutAll: 'a'. 
+			s nextPutAll: self class name;cr.
+			dict := self asDictionary.
+			sortedKeys := dict keys sorted. 
+			
+			sortedKeys
+					do: [ :k | | v | 
+					v := dict at: k.	
+					s  tab;
+						nextPutAll: k;
+						nextPutAll: v printString;
+						cr
+			 ]
+			
+		] limitedTo: 1000
+]
+
+{ #category : #'as yet unclassified' }
 DataObject >> replicationSpec [
 
 	^{} 
